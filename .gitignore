@@ -61,5 +61,5 @@ typings/
 .next
 
 # yo hubot
-+.DS_Store*
-+.hubot_history
+.DS_Store*
+.hubot_history
