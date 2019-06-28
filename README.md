@@ -12,6 +12,12 @@ available, etc!
 [hubot]: http://hubot.github.com
 [generator-hubot]: https://github.com/github/generator-hubot
 
+### Redis
+
+If you need to install [Redis](https://redis.io/) locally on your OSX laptop for development and testing, you can follow the instructions in [this blog post](https://medium.com/@petehouston/install-and-config-redis-on-mac-os-x-via-homebrew-eb8df9a4f298).
+
+I have opted to manually start redis as needed with `redis-server /usr/local/etc/redis.conf`. To verify the server is running, I use `redis-cli ping` in another Terminal window.
+
 ### Running jazz-hubot Locally
 
 You can test your hubot by running the following, however some plugins will not
