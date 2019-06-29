@@ -159,7 +159,9 @@ Additionally, `hubot-heroku-keepalive` is specified in `external-scripts.json`, 
     % npm install hubot-heroku-keepalive --save
 
 
-### Additional documentation
+### Additional documentation and links
 
 - [hubot-adapters](https://github.com/github/hubot/blob/master/docs/adapters.md)
-- [redistogo]: https://redistogo.com/
+- [redistogo](https://redistogo.com/)
+- [Slack App for Jazz the Hubot](https://api.slack.com/apps/AL0122PS4)
+- [Heroku deployment](https://dashboard.heroku.com/apps/protected-eyrie-86502)
