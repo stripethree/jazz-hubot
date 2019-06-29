@@ -63,3 +63,6 @@ typings/
 # yo hubot
 .DS_Store*
 .hubot_history
+
+# dev
+.env*
