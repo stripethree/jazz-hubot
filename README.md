@@ -24,7 +24,11 @@ You can test your hubot by running the following, however some plugins will not
 behave as expected unless the [environment variables](#configuration) they rely
 upon have been set.
 
-You can start jazz-hubot locally by running:
+Start redis:
+
+    % `redis-server /usr/local/etc/redis.conf`
+
+Start jazz-hubot:
 
     % bin/hubot
 
@@ -127,94 +131,35 @@ repo.
 
 [hubot-scripts]: https://github.com/github/hubot-scripts
 
-##  Persistence
-
-If you are going to use the `hubot-redis-brain` package (strongly suggested),
-you will need to add the Redis to Go addon on Heroku which requires a verified
-account or you can create an account at [Redis to Go][redistogo] and manually
-set the `REDISTOGO_URL` variable.
-
-    % heroku config:add REDISTOGO_URL="..."
-
-If you don't need any persistence feel free to remove the `hubot-redis-brain`
-from `external-scripts.json` and you don't need to worry about redis at all.
-
-[redistogo]: https://redistogo.com/
-
-## Adapters
-
-Adapters are the interface to the service you want your hubot to run on, such
-as Campfire or IRC. There are a number of third party adapters that the
-community have contributed. Check [Hubot Adapters][hubot-adapters] for the
-available ones.
-
-If you would like to run a non-Campfire or shell adapter you will need to add
-the adapter package as a dependency to the `package.json` file in the
-`dependencies` section.
-
-Once you've added the dependency with `npm install --save` to install it you
-can then run hubot with the adapter.
-
-    % bin/hubot -a <adapter>
-
-Where `<adapter>` is the name of your adapter without the `hubot-` prefix.
-
-[hubot-adapters]: https://github.com/github/hubot/blob/master/docs/adapters.md
-
 ## Deployment
 
     % heroku create --stack cedar
     % git push heroku master
 
-If your Heroku account has been verified you can run the following to enable
-and add the Redis to Go addon to your app.
 
-    % heroku addons:add redistogo:nano
+**TODO**
 
-If you run into any problems, checkout Heroku's [docs][heroku-node-docs].
+Add information referring to [these docs](https://hubot.github.com/docs/deploying/heroku/) about the the `rediscloud` addon for heroku.
 
-You'll need to edit the `Procfile` to set the name of your hubot.
+## Slack Variables
 
-More detailed documentation can be found on the [deploying hubot onto
-Heroku][deploy-heroku] wiki page.
+Jazz is bot for Slack and a _Bot OAuth Access Token_ is required to run it.
+Follow the instructions for _Getting a Slack Token_ on the [Slack Developer Kit for Hubot](https://slack.dev/hubot-slack/)
 
-### Deploying to UNIX or Windows
+The bot can be run locally by specifying the token on the command line.
 
-If you would like to deploy to either a UNIX operating system or Windows.
-Please check out the [deploying hubot onto UNIX][deploy-unix] and [deploying
-hubot onto Windows][deploy-windows] wiki pages.
+    % HUBOT_SLACK_TOKEN=xoxb-YOUR-TOKEN-HERE ./bin/hubot --adapter slack
 
-[heroku-node-docs]: http://devcenter.heroku.com/articles/node-js
-[deploy-heroku]: https://github.com/github/hubot/blob/master/docs/deploying/heroku.md
-[deploy-unix]: https://github.com/github/hubot/blob/master/docs/deploying/unix.md
-[deploy-windows]: https://github.com/github/hubot/blob/master/docs/deploying/windows.md
+A Heroku deployment for this bot will need this value as well.
 
-## Campfire Variables
+    % heroku config:set HUBOT_SLACK_TOKEN=xoxb-xoxb-YOUR-TOKEN-HERE
 
-If you are using the Campfire adapter you will need to set some environment
-variables. If not, refer to your adapter documentation for how to configure it,
-links to the adapters can be found on [Hubot Adapters][hubot-adapters].
+Additionally, `hubot-heroku-keepalive` is specified in `external-scripts.json`, but the package is not installed by default when the hubot is created.
 
-Create a separate Campfire user for your bot and get their token from the web
-UI.
+    % npm install hubot-heroku-keepalive --save
 
-    % heroku config:add HUBOT_CAMPFIRE_TOKEN="..."
 
-Get the numeric IDs of the rooms you want the bot to join, comma delimited. If
-you want the bot to connect to `https://mysubdomain.campfirenow.com/room/42`
-and `https://mysubdomain.campfirenow.com/room/1024` then you'd add it like
-this:
+### Additional documentation
 
-    % heroku config:add HUBOT_CAMPFIRE_ROOMS="42,1024"
-
-Add the subdomain hubot should connect to. If you web URL looks like
-`http://mysubdomain.campfirenow.com` then you'd add it like this:
-
-    % heroku config:add HUBOT_CAMPFIRE_ACCOUNT="mysubdomain"
-
-[hubot-adapters]: https://github.com/github/hubot/blob/master/docs/adapters.md
-
-## Restart the bot
-
-You may want to get comfortable with `heroku logs` and `heroku restart` if
-you're having issues.
+- [hubot-adapters](https://github.com/github/hubot/blob/master/docs/adapters.md)
+- [redistogo]: https://redistogo.com/
