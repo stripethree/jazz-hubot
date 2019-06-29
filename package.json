@@ -17,9 +17,10 @@
     "hubot-rules": "^1.0.0",
     "hubot-scripts": "^2.17.2",
     "hubot-shipit": "^0.2.1",
-    "hubot-slack": "^4.7.1"
+    "hubot-slack": "^4.7.1",
+    "markovchain": "^1.0.2"
   },
   "engines": {
-    "node": "0.10.x"
+    "node": "12.4.0"
   }
 }
